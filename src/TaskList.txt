@@ -1,0 +1,7 @@
+2;pay shein bills;30-11-2020;Payment
+1;check migration status;29-10-2020;Status
+3;pay ICA bills;30-11-2020;Payment
+4;check employment status;05-09-2020;Status
+5;Book appointment to a doctor;29-11-2020;appointment
+7;check employment status;28-10-2020;Status
+8;Cancel appointment to a doctor;10-10-2020;appointment
