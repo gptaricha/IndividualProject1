@@ -25,6 +25,7 @@ public class Task extends Project implements Comparable<Task> {
     private Date dueDate;
     private String project;
     private String status;
+   
 
     public Task(int taskId, String desc, Date date, String projectId) {
         this.taskId = taskId;
