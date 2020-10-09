@@ -24,10 +24,8 @@ public class InputReader {
      */
     public InputReader() {
         reader = new Scanner(System.in);
-
-    }
-
-    /**
+ }
+  /**
      * Returns commands from user
      *
      * @return
