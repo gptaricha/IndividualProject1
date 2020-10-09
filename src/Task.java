@@ -1,7 +1,21 @@
-import java.util.ArrayList;
+/**
+ * This class is part of the "To Do List" application.
+ * "To Do List" is a text based application to create new tasks, assign them a title  due date and group it under a project.
+ *
+ *
+ * A task comprises of the taskID, title, due date and project to which it belongs to
+ * For each record read from an input file or to be written to a file ,
+ * a Task is created having given attributes
+ *
+ * @author  Richa Gupta
+ * @version 2020.10.09
+ *
+ */
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
 
 public class Task extends Project implements Comparable<Task> {
     public static Comparator<Task> ProjectComparator = new Comparator<Task>() {
@@ -25,47 +39,41 @@ public class Task extends Project implements Comparable<Task> {
     private Date dueDate;
     private String project;
     private String status;
-   
+    private DateFormat formatter;
 
-    public Task(int taskId, String desc, Date date, String projectId) {
+     public Task(int taskId, String desc, Date date, String projectId) {
         this.taskId = taskId;
         this.taskDesc = desc;
         this.dueDate = date;
         project = projectId;
+        this.formatter = new SimpleDateFormat("dd-MM-yyyy");
     }
-
     public Task() {
-
-    }
-
-    public void createTask() {
-        System.out.println("HAHAHAHHA");
-        System.out.println("change it");
     }
 
     public int getTaskId() {
         return taskId;
     }
-
     public String getTaskDesc() {
         return taskDesc;
     }
-
     public Date getDueDate() {
         return dueDate;
     }
-
+    public String getFormatDueDate() {
+        return formatter.format(dueDate);
+    }
     public String getProject() {
         return project;
     }
 
     public String getTaskDetails() {
-        return getTaskId() + " : " + getTaskDesc() + " : " + getDueDate() + " : " + getProject();
+        return getTaskId() + " ; " + getTaskDesc() + " ; " + formatter.format(getDueDate()) + " ; " + getProject();
     }
 
     @Override
     public int compareTo(Task taskId) {
-        int compareTaskId = ((Task) taskId).getTaskId();
+        int compareTaskId = taskId.getTaskId();
         return this.taskId - compareTaskId;
     }
 }

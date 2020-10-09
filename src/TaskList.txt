@@ -1,7 +1,9 @@
-2;pay shein bills;30-11-2020;Payment
-1;check migration status;29-10-2020;Status
-3;pay ICA bills;30-11-2020;Payment
-4;check employment status;05-09-2020;Status
-5;Book appointment to a doctor;29-11-2020;appointment
-7;check employment status;28-10-2020;Status
-8;Cancel appointment to a doctor;10-10-2020;appointment
+2;Cancel doctor appointment;09-09-2020;appointment
+3;Book doctor appointment;10-10-2020;appointment
+4;buy Biryani;10-10-2020;food
+1;one;11-11-2011;mine
+6;add in github;09-10-2020;project
+7;upload;13-10-2020;project
+5;add comments;14-10-2020;project
+8;order food;14-10-2020;food
+9;check mailbox;20-10-2020;status
