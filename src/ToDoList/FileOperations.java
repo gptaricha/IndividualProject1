@@ -19,7 +19,6 @@ import java.util.List;
 
 public class FileOperations {
     private final String path = "/Users/richagupta/IndividualProject1/src/";
-    private int noOfLines;
 
     /**
      * Reading from a file & creating task objects for each record from the file
@@ -37,7 +36,6 @@ public class FileOperations {
                 String[] fields = line.split(";");   //Splitting each lines into multiple fields based on separator ';'
                 Task readTask = fileToTask(fields);
                 taskLists.add(readTask);
-                this.noOfLines += 1;                       //counting the no of tasks in the task list
             }
             br.close();
 
@@ -98,11 +96,4 @@ public class FileOperations {
         }
     }
 
-    /**
-     * Returns the no of records in the file
-     * @return
-     */
-    public int getNoOfLines() {
-        return noOfLines;
-    }
 }

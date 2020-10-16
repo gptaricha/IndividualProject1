@@ -17,7 +17,7 @@ import java.util.Scanner;
  * @version 2020.10.09
  */
 public class InputReader {
-    private final Scanner reader;
+    private Scanner reader;
 
     /**
      * Create a parser to read from the terminal window.
