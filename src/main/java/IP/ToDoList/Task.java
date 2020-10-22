@@ -11,9 +11,10 @@
  * @version 2020.10.09
  *
  */
-
+package main.java.IP.ToDoList;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Date;
 
@@ -29,46 +30,67 @@ public class Task extends Project implements Comparable<Task> {
     public static Comparator<Task> DateComparator = new Comparator<Task>() {
         @Override
         public int compare(Task firstDate, Task secondDate) {
-            Date date1 = firstDate.getDueDate();
-            Date date2 = secondDate.getDueDate();
+            LocalDate date1 = firstDate.getDueDate();
+            LocalDate date2 = secondDate.getDueDate();
             return date1.compareTo(date2);
         }
     };
-    private int taskId;
+    private int taskId =0;
     private String taskDesc;
-    private Date dueDate;
+    private LocalDate dueDate;
     private String project;
-    private String status;
-    private DateFormat formatter;
+    private boolean status;
+    private int taskLength;
 
-     public Task(int taskId, String desc, Date date, String projectId) {
+
+     public Task( int taskId,String desc, LocalDate date, String projectId,boolean status) {
         this.taskId = taskId;
         this.taskDesc = desc;
         this.dueDate = date;
-        project = projectId;
-        this.formatter = new SimpleDateFormat("dd-MM-yyyy");
+        this.project = projectId;
+        this.status = status;
+         taskLength ++;
+       // updateNoOfTasksDone(); // updates the no of completed and pending tasks
     }
     public Task() {
     }
 
+    /**
+     * It will update the count of no of tasks done
+     */
+
+
+    public void setTaskDesc(String title){
+         this.taskDesc= title;
+    }
+    public void setDueDate(LocalDate dueDate) {
+         this.dueDate= dueDate;
+    }
+    public void setProject(String projectID) {
+         this.project = projectID;
+    }
+    public void setStatus(boolean status) {
+         this.status= status;
+    }
     public int getTaskId() {
+        if(taskId ==0) {
+            taskId =1;
+        }
         return taskId;
     }
     public String getTaskDesc() {
         return taskDesc;
     }
-    public Date getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
-    public String getFormatDueDate() {
-        return formatter.format(dueDate);
-    }
+
+
     public String getProject() {
         return project;
     }
-
-    public String getTaskDetails() {
-        return getTaskId() + " ; " + getTaskDesc() + " ; " + formatter.format(getDueDate()) + " ; " + getProject();
+    public boolean getStatus() {
+         return this.status;
     }
 
     @Override

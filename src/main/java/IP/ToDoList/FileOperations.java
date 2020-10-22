@@ -9,16 +9,18 @@
  * @author Richa Gupta
  * @version 2020.10.09
  */
-
+package main.java.IP.ToDoList;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileOperations {
     private final String path = "/Users/richagupta/IndividualProject1/src/";
+    private final int noOfLines=0;
 
     /**
      * Reading from a file & creating task objects for each record from the file
@@ -27,8 +29,9 @@ public class FileOperations {
     public ArrayList<Task> readData() {
         /* An arrayList of Task type to store all the details from the input file */
        ArrayList<Task> taskLists = new ArrayList<>();
+
         try {
-            /* Attach a file to the Bufferred Reader */
+            /* Attach a file to the Buffered Reader */
             BufferedReader br = new BufferedReader(new FileReader(new File(path, "TaskList.txt")));
             String line = "";
             //Reads all the lines of the text from the buffered reader until the end of file
@@ -48,36 +51,6 @@ public class FileOperations {
         }
         return taskLists;
     }
-
-    /**
-     * Formats the object of Task type to String data type
-     * @param writeTask
-     * @return
-     */
-    private String taskToFile(Task writeTask) {
-        DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy"); // format the Date
-        return writeTask.getTaskId() + ";" + writeTask.getTaskDesc() + ";" + formatter.format(writeTask.getDueDate()) + ";" + writeTask.getProject();
-    }
-
-    /**
-     * Creates an object of type Task from the input param which is the data read from the file
-     * returns the task details of Task type
-     * @param  fields
-     * @return readTask
-     * @throws ParseException
-     */
-    private Task fileToTask(String[] fields) throws ParseException {
-        DateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        Task readTask = new Task(Integer.parseInt(fields[0]) //TaskID
-                , fields[1] // TaskDetails
-                , format.parse(fields[2]) //DueDate , formatting string to Date data type
-                , fields[3] //Project
-                //,fields[4] //Status  to be Implemented
-        );
-
-        return readTask;
-    }
-
     /**
      * Writes all the task objects into a local file and save it
      * @param list
@@ -95,5 +68,32 @@ public class FileOperations {
             System.out.println("File doesn't found " + e);
         }
     }
+    /**
+     * Formats the object of Task type to String data type
+     * @param writeTask
+     * @return
+     */
+    private String taskToFile(Task writeTask) {
+        //DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); // format the Date
+        return writeTask.getTaskId() + ";" + writeTask.getTaskDesc() + ";" + writeTask.getDueDate() + ";" + writeTask.getProject()+";"+writeTask.getStatus();
+    }
 
+    /**
+     * Creates an object of type Task from the input param which is the data read from the file
+     * returns the task details of Task type
+     * @param  fields
+     * @return readTask
+     * @throws ParseException
+     */
+    private Task fileToTask(String[] fields) throws ParseException {
+        Task readTask = new Task(Integer.parseInt(fields[0]) //TaskID
+                 ,fields[1] // TaskDetails
+                //, formatter.parse(fields[2]) //DueDate , formatting string to Date data type
+                , LocalDate.parse(fields[2])
+                , fields[3] //Project
+                , Boolean.parseBoolean(fields[4]) //Status  to be Implemented
+        );
+
+        return readTask;
+    }
 }
