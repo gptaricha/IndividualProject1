@@ -1,7 +1,6 @@
 package test.java.IP;
 
 import main.java.IP.ToDoList.Task;
-import main.java.IP.ToDoList.ToDoLy;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -43,29 +42,22 @@ public class TaskTest {
         assertEquals(LocalDate.parse(date),task.getDueDate());
        // assertEquals("Check if date entered is valid",LocalDate.parse(date),task.getDueDate());
     }
-    @Test
-    public void addTwoElements() {
 
-        String expected = "LinkedList(5,2)";
-        //assertEquals(expected, list.toString());
+    /**
+     * It tests the method getTaskDetails() of the Task class which gives the taskdetails
+     */
+    @Test
+    public void testgetTaskDetails() {
+        Task task = new Task();
+        int tid = task.getTaskId()+1;
+        String taskDetail = "Clean kitchen";
+        String date = "2020-02-11";
+        String project = "Home";
+        task = new Task(tid,taskDetail,LocalDate.parse(date),project,false);
+        String expected = " TaskID : 2, Task Title: Clean kitchen, Due Date: 2020-02-11, Project: Home";
+        assertEquals(expected, task.getTaskDetails());
     }
 
-    @Test
-    public void searchElement() {
-
-        int expected = 8;
-      //  assertEquals(expected, list.getIndex(3));
-    }
-
-    @Test
-    public void getElementValueByIndex() {
-      /*  LinkedList list = new LinkedList();
-        list.add(4);
-        list.add(9);
-        list.add(4);
-        int expected = 4;
-        assertEquals(expected, list.getElementbyIndex(8));*/
-    }
 
 
 }

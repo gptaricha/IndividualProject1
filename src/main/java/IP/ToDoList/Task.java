@@ -12,13 +12,10 @@
  *
  */
 package main.java.IP.ToDoList;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Comparator;
-import java.util.Date;
 
-public class Task extends Project implements Comparable<Task> {
+public class Task  implements Comparable<Task> {
     public static Comparator<Task> ProjectComparator = new Comparator<Task>() {
         @Override
         public int compare(Task firstProject, Task secondProject) {
@@ -92,7 +89,12 @@ public class Task extends Project implements Comparable<Task> {
     public boolean getStatus() {
          return this.status;
     }
-
+public String getTaskDetails() {
+        return " TaskID : "+this.taskId +
+                ", Task Title: "+this.taskDesc +
+                ", Due Date: "+this.dueDate+
+                ", Project: "+this.project;
+}
     @Override
     public int compareTo(Task taskId) {
         int compareTaskId = taskId.getTaskId();

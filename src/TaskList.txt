@@ -3,9 +3,10 @@
 1;ertfyui;2016-12-21;others;false
 2;ertyui;2018-04-30;personal;false
 5;werr;2019-10-31;personal;true
-4;check inbox;2020-08-12;personal;false
+4;%&/%€#";2020-08-12;personal;false
 9;go out;2020-01-01;personal;false
-8;cehck;2015-12-31;trip;false
+8;check;2015-12-31;trip;false
 10;eat;2001-01-12;food;false
 11;qw;2013-12-09;;false
-12;go home;2001-12-05;misc;false
+12;Clean kitchen;2020-02-11;Home;false
+13;Buy groceries;2020-02-11;Home;false

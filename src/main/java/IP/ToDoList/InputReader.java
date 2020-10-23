@@ -39,29 +39,68 @@ public class InputReader {
      *
      * @return
      */
-    public String getCommand() {
-        System.out.print(">> ");     // print prompt
+
+    // String cmd = prompt();
+
+
+    public String getCommand(){
+        return getCommand(null);
+    }
+    public String getCommand(String msg){
+        if(msg != null)
+            System.out.print(">> " + msg+" >> ");
+        else
+            System.out.print(">> ");     // print prompt
         return reader.nextLine().trim().toLowerCase();
     }
-    // Match for if the entered user input contains special characters
-    public boolean isSpecialCharacter(String taskToEditInString) {
 
-        Pattern regex = Pattern.compile("[$&£+,:;=?@#|'<>.-^*()%!]");
-        Matcher m = regex.matcher(taskToEditInString);
+    /*public String getCommand() {
+        System.out.print(">> ");     // print prompt
+        return reader.nextLine().trim().toLowerCase();
+    }*/
+    // Match for if the entered user input contains special characters
+    public boolean isSpecialCharacter(String enteredCmd) {
+        Pattern regex = Pattern.compile("[%@#]");
+        Matcher m = regex.matcher(enteredCmd);
         boolean isSpecialChar = m.matches();
-        System.out.println("inside isspecial: "+taskToEditInString);
-        System.out.println("value of bool: "+isSpecialChar);
         return  isSpecialChar;
     }
-    public String getValidCommand() {
+    /**
+     * Checks whether a String is numeric or not
+     */
+    public boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
+
+    public String getValidCommand(String cmd) {
+        if(!isSpecialCharacter(cmd))
+            return cmd;
         String enteredCmd;
         do {
-            System.out.println(ANSI_RED+"Not a valid input. Please enter again"+ANSI_RESET);
-            enteredCmd = getCommand();
+            enteredCmd = getCommand(ANSI_RED+"Not a valid input. Please enter again"+ANSI_RESET);
         }
         while (enteredCmd.isEmpty()||isSpecialCharacter(enteredCmd));
-        System.out.println("TESTT");
         return enteredCmd;
+    }
+
+    public int getValidIntCmd(String id) {
+        if (isNumeric(id))
+            return Integer.parseInt(id);
+        String readInt = null;
+        do {
+            readInt = getValidCommand(null);
+        }
+        while (!isNumeric(readInt));
+
+        return Integer.parseInt(readInt);
     }
 
     public LocalDate getValidDateFormat(String defaultDate) {

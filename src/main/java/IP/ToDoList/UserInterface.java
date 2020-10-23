@@ -76,7 +76,6 @@ public class UserInterface {
         System.out.println("+--------+-----------------------------+------------+-------------+");
 
      for (Task element : taskdetails) {
-
          if ( element.getStatus() == true) {
              PrintStream printf = System.out.printf(ANSI_BLUE + "| %-7s| %-28s| %-11s| %-16s|\n",
                      element.getTaskId()
@@ -98,7 +97,7 @@ public class UserInterface {
 
         for (Task element : taskdetails) {
             if ( element.getStatus() == false) {
-                PrintStream printf = System.out.printf(ANSI_BLUE + "| %-7s| %-28s| %-11s| %-16s|\n",
+                PrintStream printf = System.out.printf("|"+ANSI_BLUE +" %-7s| %-28s| %-11s| %-16s|\n",
                         element.getTaskId()
                         , element.getTaskDesc()
                         , element.getDueDate()
