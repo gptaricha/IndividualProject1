@@ -37,12 +37,8 @@ public class InputReader {
     /**
      * Returns commands from user
      *
-     * @return
+     * @return user commands in string
      */
-
-    // String cmd = prompt();
-
-
     public String getCommand(){
         return getCommand(null);
     }
@@ -53,17 +49,14 @@ public class InputReader {
             System.out.print(">> ");     // print prompt
         return reader.nextLine().trim().toLowerCase();
     }
+    /**
+     * Match for if the entered user input contains special characters
+     */
 
-    /*public String getCommand() {
-        System.out.print(">> ");     // print prompt
-        return reader.nextLine().trim().toLowerCase();
-    }*/
-    // Match for if the entered user input contains special characters
     public boolean isSpecialCharacter(String enteredCmd) {
-        Pattern regex = Pattern.compile("[%@#]");
+        Pattern regex = Pattern.compile("[%@#€]+");
         Matcher m = regex.matcher(enteredCmd);
-        boolean isSpecialChar = m.matches();
-        return  isSpecialChar;
+        return  m.matches();
     }
     /**
      * Checks whether a String is numeric or not
@@ -79,43 +72,53 @@ public class InputReader {
         }
         return true;
     }
-
-    public String getValidCommand(String cmd) {
-        if(!isSpecialCharacter(cmd))
-            return cmd;
-        String enteredCmd;
-        do {
+    /**
+     * Prompts the user to enter the input until the input is not empty and does not have special characters type
+     * @param msg
+     * @return a valid string
+     */
+    public String getValidCommand(String msg) {
+        String enteredCmd = getCommand(msg);
+        while (enteredCmd.isEmpty()||isSpecialCharacter(enteredCmd)) {
             enteredCmd = getCommand(ANSI_RED+"Not a valid input. Please enter again"+ANSI_RESET);
         }
-        while (enteredCmd.isEmpty()||isSpecialCharacter(enteredCmd));
         return enteredCmd;
     }
+    /**
+     * Prompts the user to enter the input until the input is of integer type
+     * @param msg
+     * @return value in integer type
+     */
 
-    public int getValidIntCmd(String id) {
-        if (isNumeric(id))
-            return Integer.parseInt(id);
-        String readInt = null;
-        do {
-            readInt = getValidCommand(null);
+    public int getValidIntCmd(String msg) {
+        String readInt = getCommand(msg);
+        while (!isNumeric(readInt))    {
+            readInt = getCommand(ANSI_RED+"Not a valid input. Please enter again"+ANSI_RESET);
         }
-        while (!isNumeric(readInt));
 
         return Integer.parseInt(readInt);
     }
 
-    public LocalDate getValidDateFormat(String defaultDate) {
-        if (isValidDate(defaultDate))
-            return LocalDate.parse(defaultDate);
+    /**
+     * Prompts the user to enter the date until the date is in valid format which is "YYYY-MM-DD"
+     * @param msg
+     * @return date in valid format
+     */
 
-        String sDate = null;
-        do {
-            System.out.println(ANSI_RED+"Invalid date. Enter ISO format"+ANSI_RESET);
-            sDate = getCommand();
+    public LocalDate getValidDateFormat(String msg) {
+        String sDate = getCommand(msg);
+
+        while (!isValidDate(sDate)){
+            sDate = getCommand(ANSI_RED+"Invalid date. Enter ISO format"+ANSI_RESET);
         }
-        while (!isValidDate(sDate));
-
         return LocalDate.parse(sDate);
     }
+
+    /**
+     * Returns true if the date is in valid ISO format "YYYY-MM-DD"
+     * @param s
+     * @return
+     */
 
     public boolean isValidDate(String s) {
         try {

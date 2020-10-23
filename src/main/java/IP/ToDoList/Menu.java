@@ -7,20 +7,8 @@
  */
 package main.java.IP.ToDoList;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Menu {
     public static void main (String [] args) {
-       // new ToDoLy().startToDoLy();
-       boolean r = isSpecialCharacter("%@");
-        System.out.println(r);
+        new ToDoLy().startToDoLy();
         }
-
-    public static boolean isSpecialCharacter(String enteredCmd) {
-        Pattern regex = Pattern.compile("[%@#]");
-        Matcher m = regex.matcher(enteredCmd);
-        boolean isSpecialChar = m.matches();
-        return  isSpecialChar;
-    }
 }

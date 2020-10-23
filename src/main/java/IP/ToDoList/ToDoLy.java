@@ -120,20 +120,9 @@ public class ToDoLy {
      * It will prompt the user to add task title, due date and project to which the new task would belong to
      */
     public void addTaskPrompt() {
-        String taskDetail = read.getCommand("Enter the task Title: ");
-        System.out.println("test: "+read.isSpecialCharacter(taskDetail));
-        if (taskDetail.isEmpty() || (read.isSpecialCharacter(taskDetail))) {
-            System.out.println("inside");
-            taskDetail = read.getValidCommand(taskDetail);
-        }
-
-        String sDate = read.getCommand("Enter the Due Date: ");
-        LocalDate dueDate = read.getValidDateFormat(sDate);
-
-        String project = read.getCommand("Enter Project to which the task belong to: ");
-        if (project.isEmpty()) {
-            taskDetail = read.getValidCommand(taskDetail);
-        }
+        String taskDetail = read.getValidCommand("Enter the task Title: ");
+        LocalDate dueDate = read.getValidDateFormat("Enter the Due Date: ");
+        String project = read.getValidCommand("Enter Project to which the task belong to: ");
 
         addNewTask(taskDetail, dueDate, project, false);
         System.out.println("Thank you! Task added!");
@@ -143,35 +132,39 @@ public class ToDoLy {
      * It can add the task details finally to the Task.
      */
     public void addNewTask(String taskDetail, LocalDate dueDate, String project, boolean status) {
-        int maxsofar = 0;
+        /*int maxsofar = 0;
         for (Task t : taskdetails) {
             int id = t.getTaskId();
             if (id > maxsofar)
                 maxsofar = id;
-        }
-
-        int taskID = maxsofar + 1;
+        }*/
+        int taskID = getMaxTaskID() +1;
         Task t = new Task(taskID, taskDetail, dueDate, project, status);
         taskdetails.add(t);
     }
+/**
+ *
+ */
+public int getMaxTaskID() {
+    int maxsofar = 0;
+    for (Task t : taskdetails) {
+        int id = t.getTaskId();
+        if (id > maxsofar)
+            maxsofar = id;
+    } return  maxsofar;
 
+}
     /**
      * It can edit the task, mark the task as done or remove the task
      */
     public void editTask() {
         try {
-            String taskToEditInString = read.getCommand("Enter the task Id you want to update?");
-            int taskToEdit = 0;
-            if (!(read.isNumeric(taskToEditInString))) {
-                taskToEdit = read.getValidIntCmd(taskToEditInString);
-            } else {
-                taskToEdit = Integer.parseInt(taskToEditInString);
-            }
-
-            userInterface.printEditTaskOption();
-            String editCommand = read.getCommand();
+           int taskToEdit = read.getValidIntCmd("Enter the task Id you want to update?");
             Task selectedTask = getTaskById(taskToEdit);
+            if(selectedTask !=null){
+            userInterface.printEditTaskOption();
 
+            String editCommand = read.getCommand();
 
             if (editCommand.equalsIgnoreCase("a")) {
                 updateTask(selectedTask);
@@ -181,7 +174,7 @@ public class ToDoLy {
                 removeTask(selectedTask);
             } else {
                 userInterface.printInvalidMessg();
-            }
+            } } else {System.out.println(ANSI_RED + "Task does not exists! Redirecting back to the Main Menu" + ANSI_RESET);}
         } catch (NullPointerException e) {
             System.out.println(ANSI_RED + "Task does not exists! Redirecting back to the Main Menu" + ANSI_RESET);
         }
@@ -204,9 +197,9 @@ public class ToDoLy {
      */
     public void updateTask(Task selectedTask) {
         System.out.printf("Enter new Task title to edit or hit Enter to keep title: " + ANSI_BLUE + "%s " + ANSI_RESET, selectedTask.getTaskDesc());
-        String newTaskTitle = read.getCommand();
+        String newTaskTitle = read.getCommand(null);
         if(read.isSpecialCharacter(newTaskTitle)) { newTaskTitle = read.getValidCommand(newTaskTitle);}
-        //
+
         if (!newTaskTitle.isEmpty()) {
             selectedTask.setTaskDesc(newTaskTitle);
         }

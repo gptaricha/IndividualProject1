@@ -16,7 +16,6 @@ import java.util.List;
 public class UserInterface {
     private final List<Task> taskDetails;
     protected static final String ANSI_BLUE = "\u001B[34m";
-    protected static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
     protected static final String ANSI_RESET = "\u001B[0m";
     protected static final String ANSI_PURPLE = "\u001B[35m";
     protected static final String ANSI_RED = "\u001B[31m";
@@ -126,11 +125,5 @@ public class UserInterface {
     public void printInvalidMessg() {
         System.out.println(ANSI_RED+"Invalid user command!! \n Please try again"+ANSI_RESET);
     }
-
-    /**
-     * Displays invalid user Command in RED, when the user input does not match the valid options displayed on the console
-     *
-     */
-
 
 }

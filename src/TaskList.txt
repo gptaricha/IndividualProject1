@@ -1,12 +1,6 @@
-7;1234567890+9;2020-01-09;87678;true
-6;check inbox;2020-10-24;official;false
-1;ertfyui;2016-12-21;others;false
-2;ertyui;2018-04-30;personal;false
-5;werr;2019-10-31;personal;true
-4;%&/%€#";2020-08-12;personal;false
-9;go out;2020-01-01;personal;false
-8;check;2015-12-31;trip;false
-10;eat;2001-01-12;food;false
-11;qw;2013-12-09;;false
-12;Clean kitchen;2020-02-11;Home;false
-13;Buy groceries;2020-02-11;Home;false
+5;mentor meet;2020-02-11;Home;true
+4;add commit;2020-10-23;assignment;false
+6;Book an appointment;2020-10-23;assignment;true
+3;laundry;2020-11-04;Home;false
+1;Clean kitchen;2020-11-11;Home;false
+2;push in github;2020-11-23;assignment;false

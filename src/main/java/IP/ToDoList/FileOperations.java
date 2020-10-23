@@ -11,16 +11,13 @@
  */
 package main.java.IP.ToDoList;
 import java.io.*;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileOperations {
     private final String path = "/Users/richagupta/IndividualProject1/src/";
-    private final int noOfLines=0;
 
     /**
      * Reading from a file & creating task objects for each record from the file
@@ -36,12 +33,14 @@ public class FileOperations {
             String line = "";
             //Reads all the lines of the text from the buffered reader until the end of file
             while ((line = br.readLine()) != null) {
+                if(line.trim().length() == 0)
+                    continue;
+
                 String[] fields = line.split(";");   //Splitting each lines into multiple fields based on separator ';'
                 Task readTask = fileToTask(fields);
                 taskLists.add(readTask);
             }
             br.close();
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

@@ -37,8 +37,6 @@ public class Task  implements Comparable<Task> {
     private LocalDate dueDate;
     private String project;
     private boolean status;
-    private int taskLength;
-
 
      public Task( int taskId,String desc, LocalDate date, String projectId,boolean status) {
         this.taskId = taskId;
@@ -46,7 +44,6 @@ public class Task  implements Comparable<Task> {
         this.dueDate = date;
         this.project = projectId;
         this.status = status;
-         taskLength ++;
        // updateNoOfTasksDone(); // updates the no of completed and pending tasks
     }
     public Task() {
